@@ -140,7 +140,7 @@
 									</header>
 									<ul>
 										<li><a href="index.html">Homepage</a></li>
-										<li><a href="slidepuzzle.html">Slider Game</a></li>
+										<li><a href="game.html">Slider Game</a></li>
 										<li><a href="elements.html">Admin</a></li>
 										<!--<li> -->
 											<!-- <span class="opener">Submenu</span>
