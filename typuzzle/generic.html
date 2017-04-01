@@ -34,7 +34,37 @@
 								<section>
 									<header class="main">
 										<h1>Generic</h1>
-									</header>
+								
+								<div id="header">
+		<h1>Slide Puzzle Example</h1>
+	</div>
+	<div id="maincontent">
+		<div id="what">
+			<h2>Slide Puzzle Summary</h2>
+			<p>The jQuery Slide Puzzle project is a plugin that creates a slide puzzle game out of any picture, such
+			as this shot I took of a hoverfly!</p>
+		</div>
+		<div id="how">
+			<h3>5x5</h2>
+			<img src="images/5grid.png" alt="Inqiusitive Hoverfly" id="example2">
+		</div>
+		<div id="options">
+			<h2>Options</h2>
+			<dl>
+				<dt>classmodifier</dt>
+				<dd>Used to apply class names to the elements created by the plugin. You only need to specify a class modifier if you have a name-clash.</dd>
+			
+				<dt>size</dt>
+				<dd>The number of segments across and down (i.e. 3 would be 3 segments across and 3 segments down).</dd>
+				
+				<dt>complete</dt>
+				<dd>Script to excute on completion of a puzzle.</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<!-- Just for web stats... not needed for the plugin -->
+
 
 									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
 
@@ -127,13 +157,8 @@
 										the devils den</li>
 									</ul>
 								</section>
-								<body>
+						
 
-									<div id="puzzle"></div>
-									<div id="clicks">0</div>
-									<button id="randomize">randomize</button>
-
-									</body>
 							<!-- Footer -->
 								<footer id="footer">
 									
@@ -148,8 +173,16 @@
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	
 			<script src="assets/js/main.js"></script>
+				<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.slidepuzzle.js"></script>
+	<script type="text/javascript">
+		$(document).ready( function () {
+			$("#example").slidepuzzle();
+			$("#example2").slidepuzzle({ size: 5 });
+		});
+	</script>
 
 	</body>
 </html>
