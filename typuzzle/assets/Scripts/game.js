@@ -208,7 +208,7 @@
                     shuffled[rand] = value;
                 }
             });
-            
+           
             return shuffled;
         }
         
@@ -493,8 +493,13 @@
 	    	copied_puzzle_randomised.splice(random_number, 0, removed_piece[0]);
 	    	complete = false;
 	    
+		document.getElementById('whereToPrint').innerHTML = JSON.stringify(puzzle_randomised.slice(0), null, 4);
+		
 	    complete = copied_puzzle_randomised.every(function (item, index, array) {
 		    if (item.drawnOnCanvasX === item.x && item.drawnOnCanvasY === item.y) {
+				
+				
+				
 		    	return true;
 		    } 
 		    // The final piece is actually the missing piece so we check the x/y against the empty_space x/y
