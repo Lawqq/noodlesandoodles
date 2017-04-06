@@ -37,7 +37,154 @@
 	
 	// Because of variable 'hoisting' I like to keep all vars as near to the top of the program as possible.
 	// Following variables are related to the creation of the canvas' and specific configuration
-	var doc = global.document,
+	var 
+		puzzle_actual = [
+    {
+        "x": 200,
+        "y": 200,
+        "drawnOnCanvasX": 0,
+        "drawnOnCanvasY": 0
+    },
+    {
+        "x": 200,
+        "y": 300,
+        "drawnOnCanvasX": 100,
+        "drawnOnCanvasY": 0
+    },
+    {
+        "x": 200,
+        "y": 400,
+        "drawnOnCanvasX": 200,
+        "drawnOnCanvasY": 0
+    },
+    {
+        "x": 400,
+        "y": 0,
+        "drawnOnCanvasX": 300,
+        "drawnOnCanvasY": 0
+    },
+    {
+        "x": 0,
+        "y": 0,
+        "drawnOnCanvasX": 400,
+        "drawnOnCanvasY": 0
+    },
+    {
+        "x": 0,
+        "y": 200,
+        "drawnOnCanvasX": 0,
+        "drawnOnCanvasY": 100
+    },
+    {
+        "x": 400,
+        "y": 300,
+        "drawnOnCanvasX": 100,
+        "drawnOnCanvasY": 100
+    },
+    {
+        "x": 200,
+        "y": 0,
+        "drawnOnCanvasX": 200,
+        "drawnOnCanvasY": 100
+    },
+    {
+        "x": 100,
+        "y": 300,
+        "drawnOnCanvasX": 300,
+        "drawnOnCanvasY": 100
+    },
+    {
+        "x": 400,
+        "y": 100,
+        "drawnOnCanvasX": 400,
+        "drawnOnCanvasY": 100
+    },
+    {
+        "x": 400,
+        "y": 200,
+        "drawnOnCanvasX": 0,
+        "drawnOnCanvasY": 200
+    },
+    {
+        "x": 0,
+        "y": 300,
+        "drawnOnCanvasX": 100,
+        "drawnOnCanvasY": 200
+    },
+    {
+        "x": 0,
+        "y": 400,
+        "drawnOnCanvasX": 200,
+        "drawnOnCanvasY": 200
+    },
+    {
+        "x": 200,
+        "y": 100,
+        "drawnOnCanvasX": 300,
+        "drawnOnCanvasY": 200
+    },
+    {
+        "x": 300,
+        "y": 100,
+        "drawnOnCanvasX": 400,
+        "drawnOnCanvasY": 200
+    },
+    {
+        "x": 300,
+        "y": 400,
+        "drawnOnCanvasX": 0,
+        "drawnOnCanvasY": 300
+    },
+    {
+        "x": 300,
+        "y": 300,
+        "drawnOnCanvasX": 100,
+        "drawnOnCanvasY": 300
+    },
+    {
+        "x": 100,
+        "y": 0,
+        "drawnOnCanvasX": 200,
+        "drawnOnCanvasY": 300
+    },
+    {
+        "x": 300,
+        "y": 200,
+        "drawnOnCanvasX": 300,
+        "drawnOnCanvasY": 300
+    },
+    {
+        "x": 100,
+        "y": 200,
+        "drawnOnCanvasX": 400,
+        "drawnOnCanvasY": 300
+    },
+    {
+        "x": 0,
+        "y": 100,
+        "drawnOnCanvasX": 0,
+        "drawnOnCanvasY": 400
+    },
+    {
+        "x": 100,
+        "y": 100,
+        "drawnOnCanvasX": 100,
+        "drawnOnCanvasY": 400
+    },
+    {
+        "x": 400,
+        "y": 400,
+        "drawnOnCanvasX": 200,
+        "drawnOnCanvasY": 400
+    },
+    {
+        "x": 100,
+        "y": 400,
+        "drawnOnCanvasX": 300,
+        "drawnOnCanvasY": 400
+    }
+],
+		doc = global.document,
 		canvas = doc.getElementById("game"),
 		context = canvas.getContext("2d"),
 		dragCanvas = doc.createElement("canvas"),
@@ -166,11 +313,11 @@
                 
                 if (should_draw) {
                     // Make sure shuffled array has reference (drawnOnCanvasX, drawnOnCanvasY) to where the puzzle piece has been drawn (randomly) onto the canvas
-                    puzzle_randomised[counter].drawnOnCanvasX = puzzle_squares[counter].x;
-                    puzzle_randomised[counter].drawnOnCanvasY = puzzle_squares[counter].y;
+                    puzzle_actual[counter].drawnOnCanvasX = puzzle_squares[counter].x;
+                    puzzle_actual[counter].drawnOnCanvasY = puzzle_squares[counter].y;
                     
                     // Draw puzzle slice
-                    context.drawImage(img, puzzle_randomised[counter].x, puzzle_randomised[counter].y, piece_width, piece_height, puzzle_squares[counter].x, puzzle_squares[counter].y, piece_width, piece_height);
+                    context.drawImage(img, puzzle_actual[counter].x, puzzle_actual[counter].y, piece_width, piece_height, puzzle_squares[counter].x, puzzle_squares[counter].y, piece_width, piece_height);
                 }
             
                 // Increment x positioning on each interation
@@ -215,37 +362,38 @@
         loop();
         
         // Randomise puzzle pices
-        puzzle_randomised = shuffle(puzzle_squares);
+        puzzle_randomised = puzzle_actual;
         
         // Draw puzzle pieces
         loop(true);
         
         // Randomly select a puzzle piece to remove (so user can move other pieces around)
-        random_number = Math.round(Math.random()*puzzle_randomised.length-1);
+    //    random_number = Math.round(Math.random()*puzzle_randomised.length-1); 
         
         // The result sometimes can equal -1
         if (random_number < 0) {
             random_number = 0;
         }
         
-        random_piece = puzzle_randomised[random_number];
+    //    random_piece = puzzle_randomised[random_number];
         
         // Remove the random piece from the Array also
-        removed_piece = puzzle_randomised.splice(random_number, 1);
+    //    removed_piece = puzzle_randomised.splice(random_number, 1);
         
         // Remove randomly selected piece (so there is one empty space in the puzzle for a user to start moving another piece into)
-        context.clearRect(random_piece.drawnOnCanvasX, random_piece.drawnOnCanvasY, piece_width, piece_height);
+    //    context.clearRect(random_piece.drawnOnCanvasX, random_piece.drawnOnCanvasY, piece_width, piece_height);
         
         // Keep track of empty space
         empty_space = {
-            x: random_piece.drawnOnCanvasX,
-            y: random_piece.drawnOnCanvasY
+            x: '400'.drawnOnCanvasX,
+            y: '400'.drawnOnCanvasY
         };
         
         // Let the user interact with the interface
         dragCanvas.addEventListener(eventsMap.down, checkDrag, false);
         dragCanvas.addEventListener(eventsMap.up, toggleDragCheck, false);
 	}
+
 	
 	function highlightEmptySpace(){
         // We need to first clear any 'highlight' already drawn in this empty space/
@@ -486,7 +634,7 @@
     function postData(){
 			 $.ajax({ type: "POST",
 				    url: "datainsert.php",
-				    data: puzzle_randomised, empty_space,
+				    data: puzzle_randomised,
 				    cache: false,
 				    success: function(resopnse)
 			       		{//check response
@@ -511,7 +659,6 @@
 	    	complete = false;
 	    
 		document.getElementById('whereToPrint').innerHTML = JSON.stringify(puzzle_randomised.slice(0), null, 4);
-		document.getElementById('whereToPrint2').innerHTML = JSON.stringify(empty_space);
 		
 	    complete = copied_puzzle_randomised.every(function (item, index, array) {
 		    if (item.drawnOnCanvasX === item.x && item.drawnOnCanvasY === item.y) {
